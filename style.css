@@ -1,0 +1,97 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .input-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  label {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  table {
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+  
+  td {
+    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+  }
+  
+  td:first-child {
+    border-left: 3px solid white;
+  }
+  
+  td:last-child {
+    border-right: 3px solid white;
+  }
+  
+  tr:first-child td {
+    border-top: 3px solid white;
+  }
+  
+  tr:last-child td {
+    border-bottom: 3px solid white;
+  }
+  
+  tr:nth-child(3n) td {
+    border-bottom: 3px solid white;
+  }
+  
+  tr td:nth-child(3n) {
+    border-right: 3px solid white;
+  }
+  
+  .animation {
+    animation-name: highlight;
+    animation-duration: 0.5s;
+  }
+  
+  @keyframes highlight {
+    from { background-color: #ffcc66; }
+    to { background-color: white; }
+  }
+  
