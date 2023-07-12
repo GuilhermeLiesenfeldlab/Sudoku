@@ -66,7 +66,7 @@ async function solveSudoku(board) {
         const cell = document.getElementById(`cell-${row}-${col}`);
         cell.classList.add('animation');
         cell.textContent = num;
-        await sleep(0.001); // Decreased sleep time for faster discovery
+        await sleep(5); // Decreased sleep time for faster discovery
 
         if (await solve(board)) {
           return true;
@@ -74,7 +74,7 @@ async function solveSudoku(board) {
 
         board[row][col] = 0; // Backtrack
         cell.textContent = '';
-        await sleep(0.001); // Decreased sleep time for faster discovery
+        await sleep(5); // Decreased sleep time for faster discovery
 
         // Remove animation class
         cell.classList.remove('animation');
