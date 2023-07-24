@@ -1,11 +1,9 @@
-// Function to solve the Sudoku using brute force
 async function solveSudoku(board) {
   const size = 9;
-  const emptyCell = [0, 0]; // Placeholder for empty cells
-  let totalAttempts = 0; // Variable to track the total number of attempts
-  let startTime; // Variable to store the start time
-
-  // Find empty cell in the board
+  const emptyCell = [0, 0]; 
+  let totalAttempts = 0; 
+  let startTime; 
+ 
   function findEmptyCell(board) {
     for (let row = 0; row < size; row++) {
       for (let col = 0; col < size; col++) {
@@ -19,23 +17,23 @@ async function solveSudoku(board) {
     return false;
   }
 
-  // Check if a number can be placed in a specific cell
+  
   function isValid(board, row, col, num) {
-    // Check row
+  
     for (let i = 0; i < size; i++) {
       if (board[row][i] === num) {
         return false;
       }
     }
 
-    // Check column
+    // Verifica coluna
     for (let i = 0; i < size; i++) {
       if (board[i][col] === num) {
         return false;
       }
     }
 
-    // Check 3x3 box
+    // verifica o quadrante
     const boxRow = Math.floor(row / 3) * 3;
     const boxCol = Math.floor(col / 3) * 3;
     for (let i = boxRow; i < boxRow + 3; i++) {
@@ -49,10 +47,10 @@ async function solveSudoku(board) {
     return true;
   }
 
-  // Solve the Sudoku recursively
+ 
   async function solve(board) {
     if (!findEmptyCell(board)) {
-      return true; // No more empty cells, Sudoku is solved
+      return true; // se não tiver mais espaços vazios, o sudoku estará resolvido aqui.
     }
 
     const [row, col] = emptyCell;
@@ -60,13 +58,12 @@ async function solveSudoku(board) {
     for (let num = 1; num <= size; num++) {
       if (isValid(board, row, col, num)) {
         board[row][col] = num;
-        totalAttempts++; // Increment the total attempts count
+        totalAttempts++; // adiciona o total de tentativas na variavel
 
-        // Animate cell change
         const cell = document.getElementById(`cell-${row}-${col}`);
         cell.classList.add('animation');
         cell.textContent = num;
-        await sleep(5); // Decreased sleep time for faster discovery
+        await sleep(0.5); 
 
         if (await solve(board)) {
           return true;
@@ -74,9 +71,8 @@ async function solveSudoku(board) {
 
         board[row][col] = 0; // Backtrack
         cell.textContent = '';
-        await sleep(5); // Decreased sleep time for faster discovery
+        await sleep(0.5); 
 
-        // Remove animation class
         cell.classList.remove('animation');
       }
     }
@@ -84,30 +80,25 @@ async function solveSudoku(board) {
     return false;
   }
 
-  // Make a deep copy of the board
   function copyBoard(board) {
     return board.map(row => [...row]);
   }
 
-  // Sleep function for animation delay
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // Solve the Sudoku board
   const solution = copyBoard(board);
-  startTime = performance.now(); // Start the timer
+  startTime = performance.now(); 
   await solve(solution);
-  const endTime = performance.now(); // End the timer
+  const endTime = performance.now();
 
-  // Calculate the time in seconds
+  // Calcular o tempo empregado, em segundos.
   const timeInSeconds = (endTime - startTime) / 1000;
 
-  // Return the solution, total attempts, and time in seconds
   return { solution, totalAttempts, timeInSeconds };
 }
 
-// Function to parse CSV data into a Sudoku board
 function parseCSV(csvData) {
   const lines = csvData.split('\n');
   const board = [];
@@ -120,7 +111,6 @@ function parseCSV(csvData) {
   return board;
 }
 
-// Function to display the Sudoku board on the webpage
 function displayBoard(board) {
   const table = document.getElementById('sudokuBoard');
   table.innerHTML = '';
@@ -133,7 +123,6 @@ function displayBoard(board) {
       td.id = `cell-${row}-${col}`;
       td.textContent = board[row][col] === 0 ? '' : board[row][col];
 
-      // Add class to highlight filled cells
       if (board[row][col] !== 0) {
         td.classList.add('filled');
       }
@@ -145,7 +134,6 @@ function displayBoard(board) {
   }
 }
 
-// Handle file input change event
 document.getElementById('csvFileInput').addEventListener('change', (event) => {
   const file = event.target.files[0];
 
@@ -160,7 +148,6 @@ document.getElementById('csvFileInput').addEventListener('change', (event) => {
   }
 });
 
-// Handle solve button click event
 document.getElementById('solveButton').addEventListener('click', async () => {
   const table = document.getElementById('sudokuBoard');
   const rows = table.getElementsByTagName('tr');
@@ -182,7 +169,7 @@ document.getElementById('solveButton').addEventListener('click', async () => {
   const { solution, totalAttempts, timeInSeconds } = await solveSudoku(board);
   displayBoard(solution);
 
-  // Display total attempts and time
+  // tempo e total de tentativas
   const attemptsCountElement = document.getElementById('attemptsCount');
   attemptsCountElement.textContent = `Total de tentativas: ${totalAttempts}`;
   
