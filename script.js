@@ -174,5 +174,5 @@ document.getElementById('solveButton').addEventListener('click', async () => {
   attemptsCountElement.textContent = `Total de tentativas: ${totalAttempts}`;
   
   const timeElement = document.getElementById('timeTaken');
-  timeElement.textContent = `Tempo empregado: ${timeInSeconds.toFixed(2)} seconds`;
+  timeElement.textContent = `Tempo empregado: ${timeInSeconds.toFixed(2)} segundos`;
 });
